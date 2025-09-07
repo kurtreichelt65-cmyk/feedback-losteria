@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Osteria Dresden – Bewertung & Gewinnspiel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background: #fafafa;
+    }
+    h1 { color: #b22222; }
+    .button {
+      background-color: #b22222;
+      color: white;
+      padding: 15px 25px;
+      margin: 20px;
+      font-size: 18px;
+      text-decoration: none;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .wheel {
+      margin: 40px auto;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 8px solid #333;
+      background: conic-gradient(
+        #FFD700 0deg 60deg,
+        #FF4500 60deg 120deg,
+        #32CD32 120deg 180deg,
+        #1E90FF 180deg 240deg,
+        #FF69B4 240deg 300deg,
+        #BA55D3 300deg 360deg
+      );
+      position: relative;
+      transition: transform 4s ease-out;
+    }
+    .pointer {
+      width: 0; 
+      height: 0; 
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid #333;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Danke für deinen Besuch bei L'Osteria Dresden 🍕</h1>
+  <p>Bitte unterstütze uns mit einer Bewertung – als Dankeschön kannst du am Glücksrad drehen 🎉</p>
+
+  <a class="button" href="https://maps.app.goo.gl/KH4xw1gRNQqqWNVg6" target="_blank">
+    ➡️ Jetzt Bewertung abgeben
+  </a>
+
+  <h2>🎁 Dein Gewinn wartet hier:</h2>
+  <div class="pointer"></div>
+  <div id="wheel" class="wheel"></div>
+  <br>
+  <button class="button" onclick="spinWheel()">Glücksrad drehen 🎡</button>
+
+  <p id="result"></p>
+
+  <script>
+    function spinWheel() {
+      const wheel = document.getElementById('wheel');
+      const randomDegree = 3600 + Math.floor(Math.random() * 360);
+      wheel.style.transform = `rotate(${randomDegree}deg)`;
+
+      setTimeout(() => {
+        const sector = ((randomDegree % 360) / 60) >> 0; // 6 Sektoren
+        let prize;
+        switch(sector) {
+          case 0: prize = "🎉 Gratis Dessert beim nächsten Besuch"; break;
+          case 1: prize = "🍷 1 Glas Wein kostenlos"; break;
+          case 2: prize = "☕ Gratis Espresso"; break;
+          case 3: prize = "🍕 10% Rabatt auf deine nächste Pizza"; break;
+          case 4: prize = "🥂 2 Aperitifs zum Preis von 1"; break;
+          case 5: prize = "🍝 Extra Pasta gratis"; break;
+        }
+        document.getElementById('result').innerText = "Dein Gewinn: " + prize;
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
